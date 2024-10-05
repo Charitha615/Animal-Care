@@ -1,0 +1,49 @@
+/* src/Registration.css */
+
+.registration-container,
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-container {
+  flex: 1;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+.form-control {
+  height: 45px;
+  font-size: 16px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  font-size: 18px;
+  padding: 10px 0;
+}
+
+p a {
+  color: #007bff;
+  text-decoration: none;
+}
