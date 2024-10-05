@@ -1,0 +1,674 @@
+{
+	"info": {
+		"_postman_id": "680a488b-3eec-4a8f-9ab0-0f400012f839",
+		"name": "Animal Care",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Customer Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Customer/CustomerRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Customer",
+								"CustomerRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"john@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Customer/CustomerRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Customer",
+								"CustomerRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Staff Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"register\",\r\n    \"name\": \"Jane Doe\",\r\n    \"address\": \"456 Main Street\",\r\n    \"phone_no\": \"9876543210\",\r\n    \"email\": \"jane@example.com\",\r\n    \"nic\": \"987654321V\",\r\n    \"age\": 30,\r\n    \"service_id\": 1,\r\n    \"password\": \"password456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Staff/StaffRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Staff",
+								"StaffRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"jane@example.com\",\r\n    \"password\": \"password456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Staff/StaffRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Staff",
+								"StaffRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Doctor Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"register\",\r\n    \"email\": \"doctor@example.com\",\r\n    \"password\": \"password123\",\r\n    \"full_name\": \"Dr. John Doe\",\r\n    \"gender\": \"Male\",\r\n    \"date_of_birth\": \"1980-05-15\",\r\n    \"phone_number\": \"1234567890\",\r\n    \"medical_license_number\": \"ML12345\",\r\n    \"specialization\": \"Cardiology\",\r\n    \"years_of_experience\": 10,\r\n    \"qualifications\": \"MBBS, MD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/DoctorfRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"DoctorfRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"doctor@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/DoctorfRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"DoctorfRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": " Doctor Details by ID ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/GetDoctorDetailsById.php?doctor_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"GetDoctorDetailsById.php"
+							],
+							"query": [
+								{
+									"key": "doctor_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updating Doctor Availability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_id\": \"2\",\r\n  \"available_start_time\": \"09:00:00\",\r\n  \"available_end_time\": \"20:00:00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/UpdateDoctorAvailability.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"UpdateDoctorAvailability.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Doctors API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/GetAllDoctors.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"GetAllDoctors.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Service Provider",
+			"item": [
+				{
+					"name": "Service Provider Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "action",
+									"value": "register",
+									"type": "text"
+								},
+								{
+									"key": "service_center_name",
+									"value": "Happy Pets Clinic",
+									"type": "text"
+								},
+								{
+									"key": "owner_name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "123 Pet Street",
+									"type": "text"
+								},
+								{
+									"key": "phone_no",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "johndsose@example.com",
+									"type": "text"
+								},
+								{
+									"key": "nic",
+									"value": "NIC1234567",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/chari/Downloads/WhatsApp Image 2024-10-03 at 17.22.10_1589d177.jpg"
+								},
+								{
+									"key": "service_types",
+									"value": "[\"Vaccinations\", \"X-ray\", \"Doctor channeling\"],",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "yourpassword123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Service_Provider/ServiceProviderRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Service_Provider",
+								"ServiceProviderRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SP Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"provider@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Service_Provider/ServiceProviderRegistrationLogin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Service_Provider",
+								"ServiceProviderRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Service Providers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Service_Provider",
+								"get_all_service_providers.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Service Providers Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php?id=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Service_Provider",
+								"get_all_service_providers.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Appoinment",
+			"item": [
+				{
+					"name": "Emergency Appointment Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"register_emergency_appointment\",\r\n    \"user_id\": 1,\r\n    \"appointment_time\": \"2024-10-10 15:30:00\",\r\n    \"google_meeting_link\": \"https://meet.google.com/abc-defg-hij\",\r\n    \"gender\": \"Male\",\r\n    \"payment_status\": \"Pending\",\r\n    \"doctor_id\": \"1\",\r\n    \"status\":\"NotDone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"EmergencyAppointmentAPI.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "To Get Emergency Appointments by UserID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"get_emergency_appointments_by_user\",\r\n    \"user_id\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"EmergencyAppointmentAPI.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "To Get Emergency Appointments by doctor_id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"get_emergency_appointments_by_doctor\",\r\n    \"doctor_id\": \"2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"EmergencyAppointmentAPI.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Emergency Appointments Status change",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"action\": \"update_appointment_status\",\r\n  \"appointment_id\": 4,\r\n  \"status\": \"NotDone\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"EmergencyAppointmentAPI.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all apponments by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/get_all_appoinment_by_userid.php?user_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"get_all_appoinment_by_userid.php"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all apponments by serviceProviderId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/book_appointment.php?serviceProviderId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"book_appointment.php"
+							],
+							"query": [
+								{
+									"key": "serviceProviderId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sp@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"user_type\": \"service_provider\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/animal_care_api/login.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"animal_care_api",
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
