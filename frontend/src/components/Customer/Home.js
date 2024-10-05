@@ -11,7 +11,7 @@ const Home = () => {
             {/* Main image banner */}
             <Box sx={{ height: '80vh', backgroundImage: 'url(https://cdna.artstation.com/p/marketplace/presentation_assets/002/964/164/large/file.jpg?1693155098)', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography variant="h3" color="white" sx={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
-                    Welcome to Our Hospital
+                    Welcome to Animal Care
                 </Typography>
             </Box>
 
