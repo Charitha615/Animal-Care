@@ -26,17 +26,37 @@ if ($conn->connect_error) {
 
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Decode JSON data from request
-    $data = json_decode(file_get_contents("php://input"));
+    // Determine if the request is JSON or multipart form-data
+    $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-    // Ensure the 'action' parameter exists
-    if (!isset($data->action)) {
-        echo json_encode(array("status" => "error", "message" => "Action is required"));
+    // Check for JSON content-type
+    if (strpos($contentType, 'application/json') !== false) {
+        // Decode JSON data from request
+        $data = json_decode(file_get_contents("php://input"));
+
+        // Ensure the 'action' parameter exists
+        if (!isset($data->action)) {
+            echo json_encode(array("status" => "error", "message" => "Action is required"));
+            exit;
+        }
+
+        $action = $conn->real_escape_string($data->action);
+    } 
+    // Check for form-data content-type (e.g., file uploads)
+    else if (strpos($contentType, 'multipart/form-data') !== false) {
+        // Check if 'action' is present in $_POST
+        if (!isset($_POST['action'])) {
+            echo json_encode(array("status" => "error", "message" => "Action is required"));
+            exit;
+        }
+
+        // Since form data is submitted, grab values from $_POST
+        $action = $conn->real_escape_string($_POST['action']);
+        $data = (object)$_POST; // Convert $_POST to an object to mimic JSON structure
+    } else {
+        echo json_encode(array("status" => "error", "message" => "Unsupported content type"));
         exit;
     }
-
-    // Determine if the request is for registration or login
-    $action = $conn->real_escape_string($data->action);
 
     if ($action == "register") {
         // Registration Process
@@ -78,15 +98,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Hash the password before storing
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        // Handle file upload
+        $profileImage = null; // Default to null
+        if (isset($_FILES['profile_image'])) {
+            $imageFile = $_FILES['profile_image'];
+            $imageName = time() . '_' . preg_replace('/\s+/', '_', basename($imageFile['name'])); // Remove spaces from file name and prepend a timestamp
+            $targetDir = "uploads/doctor_images/";
+            $targetFilePath = $targetDir . $imageName;
+
+            // Create directory if it doesn't exist
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($imageFile['tmp_name'], $targetFilePath)) {
+                $profileImage = $targetFilePath; // Set the file path for the image
+            } else {
+                $response = array("status" => "error", "message" => "Failed to upload profile image");
+                echo json_encode($response);
+                exit;
+            }
+        }
+
         // Insert new doctor record
-        $sql = "INSERT INTO doctors (email, password, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications)
-                VALUES ('$email', '$hashedPassword', '$full_name', '$gender', '$date_of_birth', '$phone_number', '$medical_license_number', '$specialization', '$years_of_experience', '$qualifications')";
+        $sql = "INSERT INTO doctors (email, password, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications, profile_image)
+                VALUES ('$email', '$hashedPassword', '$full_name', '$gender', '$date_of_birth', '$phone_number', '$medical_license_number', '$specialization', '$years_of_experience', '$qualifications', '$profileImage')";
 
         // Check if insertion was successful
         if ($conn->query($sql) === TRUE) {
             $doctor_id = $conn->insert_id;
 
-            $sql = "SELECT id, email, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications FROM doctors WHERE id = $doctor_id";
+            $sql = "SELECT id, email, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications, profile_image FROM doctors WHERE id = $doctor_id";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -121,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Check if doctor exists with the given email
-        $sql = "SELECT id, email, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications, password FROM doctors WHERE email = '$email'";
+        $sql = "SELECT id, email, full_name, gender, date_of_birth, phone_number, medical_license_number, specialization, years_of_experience, qualifications,profile_image, password FROM doctors WHERE email = '$email'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
