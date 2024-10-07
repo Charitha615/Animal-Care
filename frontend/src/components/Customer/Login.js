@@ -21,6 +21,14 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (formData.email == "admin@gmail.com" && formData.password == "admin"){
+      Swal.fire('Success', 'Welcome to Admin Dashboard', 'success');
+      setTimeout(() => {
+        window.location.href = "/adminDashboard";
+      }, 2500);
+      return;
+    }
+
     if (!formData.user_type) {
       Swal.fire('Error', 'Please select a user type.', 'error');
       return;

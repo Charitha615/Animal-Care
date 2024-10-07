@@ -19,6 +19,13 @@ import DoctorAppointments from './components/Doctor/DoctorAppointments.js';
 import DoctorEmergencyAppointments from './components/Doctor/DoctorEmergencyAppointments.js';
 import MyAppointments from './components/Customer/myAppoinment.js';
 
+import AdminDashboard from './components/Admin/AdminDashboard.js';
+
+import StaffDetails from './components/Admin/StaffDetails.js';
+import DoctorDetails from './components/Admin/DoctorDetails.js';
+import ServiceProviderDetails from './components/Admin/ServiceProviderDetails.js';
+
+
 
 
 
@@ -54,6 +61,12 @@ function App() {
 
 
           <Route path="/service-provider-register" element={<ServiceProviderRegistration />} />
+
+
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/staffDetails" element={<StaffDetails />} />
+          <Route path="/doctorDetails" element={<DoctorDetails />} />
+          <Route path="/serviceProviderDetails" element={<ServiceProviderDetails />} />
 
 
         </Routes>

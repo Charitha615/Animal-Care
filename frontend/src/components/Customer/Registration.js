@@ -108,7 +108,7 @@ const Registration = () => {
         <p className="text-center mt-3">
           Already have an account? <a href="/login">Login</a>
         </p>
-        <p className="text-center mt-3">
+        {/* <p className="text-center mt-3">
           Are you <strong>Staff member</strong> ? <a href="/staff-register">Register</a>
         </p>
         <p className="text-center mt-3">
@@ -116,7 +116,7 @@ const Registration = () => {
         </p>
         <p className="text-center mt-3">
           Are you <strong>Service Provider</strong> ? <a href="/service-provider-register">Register</a>
-        </p>
+        </p> */}
       </div>
     </div>
   );
