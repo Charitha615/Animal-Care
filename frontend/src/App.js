@@ -24,9 +24,9 @@ import AdminDashboard from './components/Admin/AdminDashboard.js';
 import StaffDetails from './components/Admin/StaffDetails.js';
 import DoctorDetails from './components/Admin/DoctorDetails.js';
 import ServiceProviderDetails from './components/Admin/ServiceProviderDetails.js';
+import ServiceProviderAppoinmentPage from './components/ServiceProvider/serviceAppointmentsPage.js';
 
-
-
+// import DoctorProfile from './components/Doctor/doctorProfile.js';
 
 
 
@@ -55,6 +55,8 @@ function App() {
           <Route path="/doctor/profile" element={<DoctorProfileManagement />} />
           <Route path="/doctor/appointments" element={<DoctorAppointments />} />
           <Route path="/doctor/emergency" element={<DoctorEmergencyAppointments />} />
+          {/* <Route path="/doctor/profile" element={<DoctorProfile />} /> */}
+
 
           <Route path="/my-appointments" element={<MyAppointments />} />
 
@@ -67,6 +69,9 @@ function App() {
           <Route path="/staffDetails" element={<StaffDetails />} />
           <Route path="/doctorDetails" element={<DoctorDetails />} />
           <Route path="/serviceProviderDetails" element={<ServiceProviderDetails />} />
+          <Route path="/service-provider-dashboard" element={<ServiceProviderAppoinmentPage />} />
+
+
 
 
         </Routes>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Box, Typography, Grid, Paper, Container, Button, Avatar, Card, CardContent, Modal, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
+  Box, Typography, Grid, Paper, Container, Button, Avatar, Card, CardContent, Modal, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@mui/material';
-import NavBar from '../../NavBar'; // Assuming you have a global NavBar component
+// import NavBar from '../../NavBar'; 
 import axios from 'axios'; // To make API calls
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
@@ -29,56 +29,56 @@ const DoctorDashboard = () => {
   const navigate = useNavigate();
 
   // Fetch doctor details on page load
-useEffect(() => {
-  // Get doctor_id from localStorage
-  const doctorId = localStorage.getItem('DoctorID');
-
-  if (doctorId) {
-    axios.get(`http://localhost/animal_care_api/Doctor/GetDoctorDetailsById.php?doctor_id=${doctorId}`)
-      .then(response => {
-        if (response.data.status === 'success') {
-          setDoctorDetails(response.data.doctor);
-          setAvailableStartTime(response.data.doctor.available_start_time || '');
-          setAvailableEndTime(response.data.doctor.available_end_time || '');
-        } else {
-          console.error('Failed to fetch doctor details');
-        }
-      })
-      .catch(error => console.error('Error fetching doctor details:', error));
-  } else {
-    console.error('DoctorID not found in localStorage');
-  }
-}, []);
-
-// Fetch Emergency Appointments
-useEffect(() => {
-  const fetchEmergencyAppointments = () => {
+  useEffect(() => {
     // Get doctor_id from localStorage
     const doctorId = localStorage.getItem('DoctorID');
 
     if (doctorId) {
-      axios.post('http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php', {
-        action: 'get_emergency_appointments_by_doctor',
-        doctor_id: doctorId,
-      })
+      axios.get(`http://localhost/animal_care_api/Doctor/GetDoctorDetailsById.php?doctor_id=${doctorId}`)
         .then(response => {
-          if (response.data.status === 'success' && response.data.data.length > 0) {
-            setEmergencyAppointment(response.data.data[0]);
-            setOpenEmergencyModal(true);
+          if (response.data.status === 'success') {
+            setDoctorDetails(response.data.doctor);
+            setAvailableStartTime(response.data.doctor.available_start_time || '');
+            setAvailableEndTime(response.data.doctor.available_end_time || '');
           } else {
-            setEmergencyAppointment(null);
+            console.error('Failed to fetch doctor details');
           }
         })
-        .catch(error => console.error('Error fetching emergency appointments:', error));
+        .catch(error => console.error('Error fetching doctor details:', error));
     } else {
       console.error('DoctorID not found in localStorage');
     }
-  };
+  }, []);
 
-  fetchEmergencyAppointments();
-  const intervalId = setInterval(fetchEmergencyAppointments, 10000); // Poll every 30 seconds
-  return () => clearInterval(intervalId);
-}, []);
+  // Fetch Emergency Appointments
+  useEffect(() => {
+    const fetchEmergencyAppointments = () => {
+      // Get doctor_id from localStorage
+      const doctorId = localStorage.getItem('DoctorID');
+
+      if (doctorId) {
+        axios.post('http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php', {
+          action: 'get_emergency_appointments_by_doctor',
+          doctor_id: doctorId,
+        })
+          .then(response => {
+            if (response.data.status === 'success' && response.data.data.length > 0) {
+              setEmergencyAppointment(response.data.data[0]);
+              setOpenEmergencyModal(true);
+            } else {
+              setEmergencyAppointment(null);
+            }
+          })
+          .catch(error => console.error('Error fetching emergency appointments:', error));
+      } else {
+        console.error('DoctorID not found in localStorage');
+      }
+    };
+
+    fetchEmergencyAppointments();
+    const intervalId = setInterval(fetchEmergencyAppointments, 10000); // Poll every 30 seconds
+    return () => clearInterval(intervalId);
+  }, []);
 
 
   // Fetch Patients
@@ -156,7 +156,7 @@ useEffect(() => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box sx={{ py: 8, backgroundColor: '#f7f7f7' }}>
         <Container>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
@@ -176,10 +176,11 @@ useEffect(() => {
                       <Grid item xs={12} sm={4} display="flex" justifyContent="center">
                         <Avatar
                           alt={doctorDetails.full_name}
-                          src={doctorDetails.avatarUrl || 'https://i.pravatar.cc/150?img=12'}
+                          src={doctorDetails.avatarUrl || `http://localhost/animal_care_api/Doctor/${doctorDetails.profile_image}`}
                           sx={{ width: 150, height: 150 }}
                         />
                       </Grid>
+
                       <Grid item xs={12} sm={8}>
                         <Typography variant="h5">{doctorDetails.full_name}</Typography>
                         <Grid container spacing={1} alignItems="center">
@@ -282,12 +283,12 @@ useEffect(() => {
               <Card sx={{ textAlign: 'center', padding: 2, borderRadius: 3, boxShadow: 3 }}>
                 <Typography variant="h6">Profile Management</Typography>
                 <Typography variant="body2" color="textSecondary">Manage your profile and credentials.</Typography>
-                <Button variant="contained" color="primary" sx={{ marginTop: 2 }} onClick={() => navigate('/profile')}>
+                <Button variant="contained" color="primary" sx={{ marginTop: 2 }} onClick={() => navigate('/doctor/profile')}>
                   GO TO PROFILE
                 </Button>
               </Card>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            {/* <Grid item xs={12} sm={4}>
               <Card sx={{ textAlign: 'center', padding: 2, borderRadius: 3, boxShadow: 3 }}>
                 <Typography variant="h6">Appointments</Typography>
                 <Typography variant="body2" color="textSecondary">View and manage your upcoming appointments.</Typography>
@@ -295,7 +296,7 @@ useEffect(() => {
                   VIEW APPOINTMENTS
                 </Button>
               </Card>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={4}>
               <Card sx={{ textAlign: 'center', padding: 2, borderRadius: 3, boxShadow: 3 }}>
                 <Typography variant="h6">Emergency Appointments</Typography>

@@ -15,14 +15,26 @@ const StaffDetails = () => {
             <AdminNavBar /> {/* Admin navigation bar */}
             <main className="main-content">
                 <header className="header">
-                    <h2>Staff Details</h2>
-                    <button className="logout-btn">Logout</button>
+                    <button
+                        className="logout-btn"
+                        onClick={() => {
+                            // Clear all local storage items
+                            localStorage.clear();
+
+                            // Redirect to the home page
+                            window.location.href = "/";
+                        }}
+                    >
+                        Logout
+                    </button>
+
                     <button className="profile-btn">Profile</button>
                 </header>
 
+
                 <section className="dashboard-content">
                     <h3>List of Staff Members</h3>
-                   
+
 
                     <button className="register-staff-btn" onClick={handleRegisterStaff}>
                         Register New Staff

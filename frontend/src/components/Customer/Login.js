@@ -68,6 +68,7 @@ const Login = () => {
             }, 2500);
 
           } else if (user.user_type === 'service_provider') {
+            localStorage.setItem('service_providerID', user.id);
             setTimeout(() => {
               window.location.href = "/service-provider-dashboard";
             }, 2500);

@@ -10,9 +10,22 @@ const AdminDashboard = () => {
 
             <main className="main-content">
                 <header className="header">
-                    <button className="logout-btn">Logout</button>
+                    <button
+                        className="logout-btn"
+                        onClick={() => {
+                            // Clear all local storage items
+                            localStorage.clear();
+
+                            // Redirect to the home page
+                            window.location.href = "/";
+                        }}
+                    >
+                        Logout
+                    </button>
+
                     <button className="profile-btn">Profile</button>
                 </header>
+
 
                 <section className="dashboard-content">
                     <div className="dashboard-cards">

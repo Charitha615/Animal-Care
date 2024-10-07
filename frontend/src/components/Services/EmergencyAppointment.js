@@ -82,11 +82,11 @@ const EmergencyAppointment = () => {
 
     setLoading(true);
 
-    const userId = localStorage.getItem('UserID'); 
-    const googleMeetingLink = 'https://meet.google.com/tqe-gzex-gxv'; 
+    const userId = localStorage.getItem('UserID');
+    const googleMeetingLink = 'https://meet.google.com/tqe-gzex-gxv';
     const paymentStatus = 'Completed';
     const status = 'NotDone';
-    const appointmentTime = getCurrentTime().format('YYYY-MM-DD HH:mm:ss'); 
+    const appointmentTime = getCurrentTime().format('YYYY-MM-DD HH:mm:ss');
 
     const payload = {
       action: 'register_emergency_appointment',
@@ -95,8 +95,8 @@ const EmergencyAppointment = () => {
       google_meeting_link: googleMeetingLink,
       gender: gender,
       payment_status: paymentStatus,
-      doctor_id: selectedDoctorId, 
-      status: status, 
+      doctor_id: selectedDoctorId,
+      status: status,
     };
 
     try {
@@ -213,20 +213,20 @@ const EmergencyAppointment = () => {
                       sx={{
                         padding: 2,
                         textAlign: 'center',
-                        border: available ? '3px solid green' : 'none', 
+                        border: available ? '3px solid green' : 'none',
                       }}
                       onClick={() => selectDoctor(doctor.id)}
                     >
                       <Box
                         sx={{
                           height: 150,
-                          backgroundImage:
-                            'url(https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg)', // Replace with doctor image
+                          backgroundImage: `url(http://localhost/animal_care_api/Doctor/${doctor.profile_image})`, // Ensure 'doctor.profile_image' is defined
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           mb: 2,
                         }}
                       ></Box>
+
                       <Typography variant="h6">{doctor.full_name}</Typography>
                       <Typography variant="body2">Specialization: {doctor.specialization}</Typography>
                       <Typography variant="body2">Experience: {doctor.years_of_experience} years</Typography>

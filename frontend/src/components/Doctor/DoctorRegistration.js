@@ -15,31 +15,60 @@ const DoctorRegistration = () => {
     medical_license_number: '',
     specialization: '',
     years_of_experience: '',
-    qualifications: ''
+    qualifications: '',
+    profile_image: null // New field for profile image
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === 'profile_image') {
+      // Handling file input
+      let file = e.target.files[0];
+      if (file) {
+        // Remove spaces from the file name
+        const renamedFile = new File(
+          [file],
+          file.name.replace(/\s+/g, '_'),
+          { type: file.type }
+        );
+        setFormData({
+          ...formData,
+          profile_image: renamedFile
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(`${config.API_BASE_URL}/Doctor/DoctorfRegistrationLogin.php`, {
-      action: 'register',
-      email: formData.email,
-      password: formData.password,
-      full_name: formData.full_name,
-      gender: formData.gender,
-      date_of_birth: formData.date_of_birth,
-      phone_number: formData.phone_number,
-      medical_license_number: formData.medical_license_number,
-      specialization: formData.specialization,
-      years_of_experience: parseInt(formData.years_of_experience, 10),
-      qualifications: formData.qualifications,
+    // Creating a FormData object to send form data and the image
+    const submissionData = new FormData();
+    submissionData.append('action', 'register');
+    submissionData.append('email', formData.email);
+    submissionData.append('password', formData.password);
+    submissionData.append('full_name', formData.full_name);
+    submissionData.append('gender', formData.gender);
+    submissionData.append('date_of_birth', formData.date_of_birth);
+    submissionData.append('phone_number', formData.phone_number);
+    submissionData.append('medical_license_number', formData.medical_license_number);
+    submissionData.append('specialization', formData.specialization);
+    submissionData.append('years_of_experience', parseInt(formData.years_of_experience, 10));
+    submissionData.append('qualifications', formData.qualifications);
+
+    // Adding the profile image to the submission data if it exists
+    if (formData.profile_image) {
+      submissionData.append('profile_image', formData.profile_image);
+    }
+
+    axios.post(`${config.API_BASE_URL}/Doctor/DoctorfRegistrationLogin.php`, submissionData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
     .then((response) => {
       console.log("Response:", response);
@@ -70,7 +99,7 @@ const DoctorRegistration = () => {
   return (
     <div className="registration-container">
       <div className="image-container">
-      <img src="https://www.eylulveterinerlik.com/upload/galeri/boluveteriner.jpg" alt="Dog and Cat" />
+        <img src="https://www.eylulveterinerlik.com/upload/galeri/boluveteriner.jpg" alt="Dog and Cat" />
       </div>
 
       <div className="form-container">
@@ -189,6 +218,17 @@ const DoctorRegistration = () => {
               required
             />
           </div>
+          <div className="form-group mb-3">
+            <label>Profile Image:</label>
+            <input
+              type="file"
+              className="form-control"
+              name="profile_image"
+              accept="image/*"
+              onChange={handleChange}
+            />
+          </div>
+
           <button type="submit" className="btn btn-success w-100">Register</button>
         </form>
         <p className="text-center mt-3">
