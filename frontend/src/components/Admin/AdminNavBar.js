@@ -22,7 +22,7 @@ const AdminNavBar = () => {
                 </li>
                 <li className="menu-item">
                     <Link to="/staffDetails">
-                        <FaUsers className="icon" /> Staff Details
+                        <FaUsers className="icon" /> Staff Management
                     </Link>
                 </li>
                 <li className="menu-item">
@@ -37,7 +37,7 @@ const AdminNavBar = () => {
                     </Link>
                 </li>
                 <li className="menu-item">
-                    <Link to="/admin-dashboard/customersDetails">
+                    <Link to="/customerDetails">
                         <FaUser className="icon" /> Customers Details
                     </Link>
                 </li>

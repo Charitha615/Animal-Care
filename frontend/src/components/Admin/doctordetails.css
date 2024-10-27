@@ -1,0 +1,83 @@
+.doctors-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.doctors-table th, .doctors-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.doctors-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.doctors-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.register-staff-btn {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: #fff; /* White text color */
+    font-size: 16px; /* Slightly larger font */
+    padding: 10px 20px; /* Padding for size */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold font */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+    margin-top: 10px; /* Spacing above the button */
+}
+
+.register-staff-btn:hover {
+    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%); /* Reverse gradient on hover */
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+
+.service-providers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.service-providers-table th, .service-providers-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.service-providers-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.service-providers-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Styling for the Register New Service Provider button */
+.register-staff-btn {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.register-staff-btn:hover {
+    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}

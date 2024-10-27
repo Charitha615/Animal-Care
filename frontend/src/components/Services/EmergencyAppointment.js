@@ -23,8 +23,10 @@ import NavBar from '../../NavBar'; // Import the NavBar
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import moment from 'moment'; // Import moment.js to handle time
+import { gapi } from 'gapi-script'; // Import Google API
 
 const EmergencyAppointment = () => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [openDialog, setOpenDialog] = useState(false); // Dialog state
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,24 @@ const EmergencyAppointment = () => {
   const [doctors, setDoctors] = useState([]); // New state for storing doctors
   const [selectedDoctorId, setSelectedDoctorId] = useState(null); // To store selected doctor ID
   const [doctorSelected, setDoctorSelected] = useState(false); // To track if a doctor is selected
+  const [googleMeetingLink, setGoogleMeetingLink] = useState('');
 
+  const meetingLinks = [
+    'https://meet.google.com/abc-defg-hij',
+    'https://meet.google.com/klm-nopq-rst',
+    'https://meet.google.com/uvw-xyza-abc',
+    'https://meet.google.com/uvw-xyza-bcd',
+    'https://meet.google.com/uvw-xyza-asd',
+    'https://meet.google.com/uvw-xyza-wes',
+    'https://meet.google.com/uvw-xyza-hth',
+    'https://meet.google.com/uvw-xyza-2es',
+    'https://meet.google.com/uvw-xyza-dah',
+  ];
+
+  const getRandomMeetingLink = () => {
+    const randomIndex = Math.floor(Math.random() * meetingLinks.length);
+    return meetingLinks[randomIndex];
+  };
   // Handle dialog open and close
   const handleOpenDialog = () => {
     if (selectedDoctorId) {
@@ -48,6 +67,56 @@ const EmergencyAppointment = () => {
     }
   };
 
+  // Load the Google API client when the component mounts
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: "177739364117-ar82gij8fo3arkmcvh85484nsfb6qu0m.apps.googleusercontent.com", // Replace with your Google Client ID
+        scope: "https://www.googleapis.com/auth/calendar.events",
+      });
+    };
+    gapi.load("client:auth2", initClient);
+  }, []);
+
+  // Function to authenticate and create a Google Meet link
+  const generateGoogleMeetLink = async () => {
+    try {
+      const user = await gapi.auth2.getAuthInstance().signIn();
+      const calendar = gapi.client.calendar;
+
+      // Define the event details
+      const event = {
+        summary: "Emergency Appointment",
+        start: {
+          dateTime: new Date().toISOString(),
+          timeZone: "America/Los_Angeles",
+        },
+        end: {
+          dateTime: new Date(Date.now() + 30 * 60000).toISOString(), // 30 minutes later
+          timeZone: "America/Los_Angeles",
+        },
+        conferenceData: {
+          createRequest: {
+            requestId: "sample-request-id",
+          },
+        },
+      };
+
+      // Insert the event to create a Google Meet link
+      const response = await calendar.events.insert({
+        calendarId: "primary",
+        resource: event,
+        conferenceDataVersion: 1,
+      });
+
+      setGoogleMeetingLink(response.result.hangoutLink); // Store the generated link
+      return response.result.hangoutLink;
+    } catch (error) {
+      console.error("Error generating Google Meet link:", error);
+      return null;
+    }
+  };
+
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setPaymentConfirmed(false); // Reset payment state when dialog closes
@@ -59,17 +128,29 @@ const EmergencyAppointment = () => {
     return now;
   };
 
-  // Function to check if doctor is available
   const isDoctorAvailable = (startTime, endTime) => {
-    const now = getCurrentTime();
-    const start = moment(startTime, 'HH:mm:ss'); // Convert start time to moment
-    const end = moment(endTime, 'HH:mm:ss'); // Convert end time to moment
+    const now = moment();
+    let start = moment(startTime, 'HH:mm:ss');
+    let end = moment(endTime, 'HH:mm:ss');
 
-    return now.isBetween(start, end); // Check if current time is between start and end
+    if (end.isBefore(start)) {
+      end.add(1, 'day');
+    }
+
+    console.log("start time: ", startTime);
+    console.log("end time: ", endTime);
+    console.log("now time: ", now);
+
+    return now.isBetween(start, end);
   };
+
+
 
   // Handle Payment Process
   const handlePayment = async () => {
+    const meetingLink = getRandomMeetingLink(); // Retrieve a random link
+    setGoogleMeetingLink(meetingLink);
+
     if (!selectedDoctorId) {
       Swal.fire({
         title: 'Error',
@@ -83,16 +164,15 @@ const EmergencyAppointment = () => {
     setLoading(true);
 
     const userId = localStorage.getItem('UserID');
-    const googleMeetingLink = 'https://meet.google.com/tqe-gzex-gxv';
     const paymentStatus = 'Completed';
     const status = 'NotDone';
-    const appointmentTime = getCurrentTime().format('YYYY-MM-DD HH:mm:ss');
+    const appointmentTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     const payload = {
       action: 'register_emergency_appointment',
       user_id: userId,
       appointment_time: appointmentTime,
-      google_meeting_link: googleMeetingLink,
+      google_meeting_link: meetingLink,
       gender: gender,
       payment_status: paymentStatus,
       doctor_id: selectedDoctorId,
@@ -103,12 +183,11 @@ const EmergencyAppointment = () => {
       setOpenDialog(false);
       setPaymentConfirmed(false);
       const response = await axios.post('http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php', payload);
-      console.log(response.data.status);
       if (response.data.status === 'success') {
         setPaymentConfirmed(true);
         Swal.fire({
           title: 'Payment Successful!',
-          html: `Your emergency appointment has been booked. <br> <a href="${googleMeetingLink}" target="_blank">Join the Meeting</a>`,
+          html: `Your emergency appointment has been booked. <br> <a href="${meetingLink}" target="_blank">Join the Meeting</a>`,
           icon: 'success',
           confirmButtonText: 'OK',
         });
@@ -131,6 +210,7 @@ const EmergencyAppointment = () => {
       setLoading(false);
     }
   };
+
 
   // Fetch doctors data from API
   useEffect(() => {
@@ -155,9 +235,22 @@ const EmergencyAppointment = () => {
     setDoctorSelected(true);
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(timer); // Cleanup on unmount
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavBar />
+
+      <Box sx={{ textAlign: 'center', mt: 2 }}>
+        <Typography variant="h2" component="div" gutterBottom>
+          {time}
+        </Typography>
+      </Box>
 
       <Container style={{ marginTop: 40 }}>
         <Grid container spacing={4}>
@@ -178,9 +271,14 @@ const EmergencyAppointment = () => {
               <Typography variant="h4" gutterBottom>
                 24-Hour Emergency Services
               </Typography>
-              <Typography variant="body1" paragraph>
+              <Typography variant="h6" style={{ fontWeight: 'bold',marginTop:50 }}>
+                A pet can get sick at any time of the day, but it can be difficult for the pet owner to take the animal to the vet every time. We have introduced these 24-hour emergency services for your convenience in such cases.
+                Here you can meet a veterinarian at any time of the day through video call conference and get the support you need.
+              </Typography>
+              <Typography variant="body1" paragraph style={{ marginTop:50 }}>
                 We provide around-the-clock emergency services for your pets with highly trained professionals available at all times.
               </Typography>
+
               {/* Main "Book Emergency Appointment" Button */}
               <Button
                 variant="contained"
@@ -312,9 +410,10 @@ const EmergencyAppointment = () => {
               <Typography>
                 Payment successful! Please join the emergency appointment via the Google Meet link below:
               </Typography>
-              <Link href="https://meet.google.com/tqe-gzex-gxv" target="_blank" rel="noopener" sx={{ mt: 2 }}>
-                https://meet.google.com/tqe-gzex-gxv
+              <Link href={googleMeetingLink} target="_blank" rel="noopener" sx={{ mt: 2 }}>
+                {googleMeetingLink}
               </Link>
+
             </Box>
           )}
         </DialogContent>

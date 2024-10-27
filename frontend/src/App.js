@@ -23,6 +23,7 @@ import AdminDashboard from './components/Admin/AdminDashboard.js';
 
 import StaffDetails from './components/Admin/StaffDetails.js';
 import DoctorDetails from './components/Admin/DoctorDetails.js';
+import CustomerDetails from './components/Admin/customerDetails.js';
 import ServiceProviderDetails from './components/Admin/ServiceProviderDetails.js';
 import ServiceProviderAppoinmentPage from './components/ServiceProvider/serviceAppointmentsPage.js';
 
@@ -68,6 +69,7 @@ function App() {
           <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/staffDetails" element={<StaffDetails />} />
           <Route path="/doctorDetails" element={<DoctorDetails />} />
+          <Route path="/customerDetails" element={<CustomerDetails />} />
           <Route path="/serviceProviderDetails" element={<ServiceProviderDetails />} />
           <Route path="/service-provider-dashboard" element={<ServiceProviderAppoinmentPage />} />
 

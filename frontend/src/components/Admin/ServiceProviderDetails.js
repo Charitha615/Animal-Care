@@ -1,48 +1,86 @@
-// StaffDetails.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate to handle navigation
-import AdminNavBar from './AdminNavBar'; // Import the AdminNavBar
+// ServiceProviderDetails.js
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AdminNavBar from './AdminNavBar';
+import './doctordetails.css';
 
-const StaffDetails = () => {
-    const navigate = useNavigate(); // Create a navigate function to handle routing
+const ServiceProviderDetails = () => {
+    const [serviceProviders, setServiceProviders] = useState([]);
+    const navigate = useNavigate();
 
-    const handleRegisterStaff = () => {
-        navigate('/service-provider-register'); // Navigate to the staff registration page when clicked
+    useEffect(() => {
+        // Fetch service providers data from API
+        fetch('http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    setServiceProviders(data.data);
+                }
+            })
+            .catch(error => console.error('Error fetching service provider data:', error));
+    }, []);
+
+    const handleRegisterServiceProvider = () => {
+        navigate('/service-provider-register');
     };
 
     return (
         <div className="admin-dashboard">
-            <AdminNavBar /> {/* Admin navigation bar */}
+            <AdminNavBar />
             <main className="main-content">
                 <header className="header">
                     <button
                         className="logout-btn"
                         onClick={() => {
-                            // Clear all local storage items
                             localStorage.clear();
-
-                            // Redirect to the home page
                             window.location.href = "/";
                         }}
                     >
                         Logout
                     </button>
-
                     <button className="profile-btn">Profile</button>
                 </header>
 
-
                 <section className="dashboard-content">
                     <h3>List of Provider Members</h3>
-
-
-                    <button className="register-staff-btn" onClick={handleRegisterStaff}>
+                    
+                    <button className="register-staff-btn" onClick={handleRegisterServiceProvider}>
                         Register New Service Provider
                     </button>
+
+                    {/* Table for displaying service providers */}
+                    <table className="service-providers-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Service Center Name</th>
+                                <th>Owner Name</th>
+                                <th>Location</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>NIC</th>
+                                <th>Service Types</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {serviceProviders.map((provider) => (
+                                <tr key={provider.id}>
+                                    <td>{provider.id}</td>
+                                    <td>{provider.service_center_name}</td>
+                                    <td>{provider.owner_name}</td>
+                                    <td>{provider.location}</td>
+                                    <td>{provider.phone_no}</td>
+                                    <td>{provider.email}</td>
+                                    <td>{provider.nic}</td>
+                                    <td>{provider.service_types.join(', ')}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </section>
             </main>
         </div>
     );
 };
 
-export default StaffDetails;
+export default ServiceProviderDetails;

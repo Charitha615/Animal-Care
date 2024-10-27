@@ -26,6 +26,7 @@ const DoctorDashboard = () => {
   const [filteredPatients, setFilteredPatients] = useState([]);
   const [emergencyAppointment, setEmergencyAppointment] = useState(null); // Emergency Appointment State
   const [openEmergencyModal, setOpenEmergencyModal] = useState(false); // Modal for Emergency Appointments
+  const [emergencyAppointments, setEmergencyAppointments] = useState([]);
   const navigate = useNavigate();
 
   // Fetch doctor details on page load
@@ -153,6 +154,30 @@ const DoctorDashboard = () => {
       })
       .catch(error => console.error('Error marking appointment as done:', error));
   };
+
+  const fetchEmergencyAppointments = () => {
+    const doctorId = localStorage.getItem('DoctorID');
+    if (doctorId) {
+      axios.post('http://localhost/animal_care_api/Appointment/EmergencyAppointmentAPI.php', {
+        action: 'get_emergency_appointments_all_by_doctor',
+        doctor_id: doctorId,
+      })
+        .then(response => {
+          if (response.data.status === 'success') {
+            setEmergencyAppointments(response.data.data);
+            setOpenEmergencyModal(true);
+          } else {
+            console.error('Failed to fetch emergency appointments');
+          }
+        })
+        .catch(error => console.error('Error fetching emergency appointments:', error));
+    } else {
+      console.error('DoctorID not found in localStorage');
+    }
+  };
+
+  // Handle closing the emergency appointments modal
+  const handleCloseEmergencyModal = () => setOpenEmergencyModal(false);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -288,25 +313,57 @@ const DoctorDashboard = () => {
                 </Button>
               </Card>
             </Grid>
-            {/* <Grid item xs={12} sm={4}>
-              <Card sx={{ textAlign: 'center', padding: 2, borderRadius: 3, boxShadow: 3 }}>
-                <Typography variant="h6">Appointments</Typography>
-                <Typography variant="body2" color="textSecondary">View and manage your upcoming appointments.</Typography>
-                <Button variant="contained" color="primary" sx={{ marginTop: 2 }} onClick={() => navigate('/appointments')}>
-                  VIEW APPOINTMENTS
-                </Button>
-              </Card>
-            </Grid> */}
+
             <Grid item xs={12} sm={4}>
               <Card sx={{ textAlign: 'center', padding: 2, borderRadius: 3, boxShadow: 3 }}>
                 <Typography variant="h6">Emergency Appointments</Typography>
                 <Typography variant="body2" color="textSecondary">Handle emergency appointments efficiently.</Typography>
-                <Button variant="contained" color="primary" sx={{ marginTop: 2 }} onClick={() => navigate('/emergency-appointments')}>
+                <Button variant="contained" color="primary" sx={{ marginTop: 2 }}  onClick={fetchEmergencyAppointments}>
                   EMERGENCY APPOINTMENTS
                 </Button>
               </Card>
             </Grid>
           </Grid>
+
+          {/* Emergency Appointments Modal */}
+          <Modal open={openEmergencyModal} onClose={handleCloseEmergencyModal}>
+            <Box sx={{
+              position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2, width: '80%',
+            }}>
+              <Typography variant="h6">Emergency Appointments</Typography>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Customer Name</TableCell>
+                      <TableCell>Appointment Time</TableCell>
+                      <TableCell>Meet Link</TableCell>
+                      <TableCell>Payment Status</TableCell>
+                      <TableCell>Status</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {emergencyAppointments.length > 0 ? (
+                      emergencyAppointments.map((appointment) => (
+                        <TableRow key={appointment.id}>
+                          <TableCell>{appointment.customer_name}</TableCell>
+                          <TableCell>{appointment.appointment_time}</TableCell>
+                          <TableCell>{appointment.google_meeting_link}</TableCell>
+                          <TableCell>{appointment.payment_status}</TableCell>
+                          <TableCell>{appointment.status}</TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={3} align="center">No emergency appointments</TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+          </Modal>
 
         </Container>
       </Box>

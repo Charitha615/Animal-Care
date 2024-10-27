@@ -4,13 +4,13 @@ import NavBar from '../../NavBar'; // Import the NavBar
 import axios from 'axios'; // You need axios to make API requests
 import { useParams } from 'react-router-dom'; // Import useParams to get serviceProviderId from URL
 import Swal from 'sweetalert2';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const BookAppointment = () => {
     const navigate = useNavigate();
     // Extract serviceProviderId from the URL
     const { serviceProviderId } = useParams();
-    const userId = localStorage.getItem('UserID'); 
+    const userId = localStorage.getItem('UserID');
 
     // Form states
     const [formValues, setFormValues] = useState({
@@ -21,7 +21,7 @@ const BookAppointment = () => {
         serviceType: [],
         date: '',
         time: '',
-        serviceProviderId:serviceProviderId
+        serviceProviderId: serviceProviderId
     });
 
     const [serviceTypes, setServiceTypes] = useState([]);
@@ -70,7 +70,17 @@ const BookAppointment = () => {
                 ...formValues,
                 serviceProviderId // Send the serviceProviderId with form values
             });
-            
+
+            // Check if the response status indicates an error
+            if (response.data.status === "error") {  // Corrected "error" to be a string
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to book the appointment',
+                    text: response.data.message,
+                });
+                return;  // Exit early if there's an error
+            }
+
             // Show success message using SweetAlert2
             Swal.fire({
                 icon: 'success',
@@ -79,7 +89,7 @@ const BookAppointment = () => {
                 timer: 1500
             }).then(() => {
                 // Redirect to /appointment after success
-                navigate('/appointment');
+                navigate('/appointment'); // Uncomment and make sure navigate is defined
             });
 
         } catch (error) {
@@ -93,6 +103,7 @@ const BookAppointment = () => {
             });
         }
     };
+
 
     // Clear the form
     const handleClear = () => {

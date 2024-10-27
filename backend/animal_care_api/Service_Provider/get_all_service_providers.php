@@ -88,7 +88,7 @@ function getServiceProviderById($id) {
         echo json_encode(['status' => 'success', 'data' => $serviceProvider]);
     } else {
         http_response_code(404); // No service provider found
-        echo json_encode(['status' => 'error', 'message' => 'Service provider not found']);
+        echo json_encode(['status' => 'error', 'message' => 'Service provider not foundss']);
     }
 
     $stmt->close();

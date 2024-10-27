@@ -114,6 +114,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+        // Get emergency appointments by doctor_id
+        if ($action == "get_emergency_appointments_all_by_doctor") {
+            if (!isset($data->doctor_id)) {
+                throw new Exception("DoctorID is required");
+            }
+
+            $doctor_id = $conn->real_escape_string($data->doctor_id);
+
+            // Query to get appointments by doctor_id
+            $sql = "SELECT * FROM emergency_appointments WHERE doctor_id = '$doctor_id'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                $appointments = array();
+                while ($row = $result->fetch_assoc()) {
+                    $appointments[] = $row;
+                }
+                echo json_encode(array("status" => "success", "data" => $appointments));
+            } else {
+                echo json_encode(array("status" => "success", "data" => [], "message" => "No appointments found for this doctor"));
+            }
+        }
+
         
 
         if ($action == "update_appointment_status") {

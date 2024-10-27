@@ -39,8 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                // Fetch and return the service provider's details
-                $providerDetails = $result->fetch_assoc();
+                // Initialize an array to hold all details
+                $providerDetails = array();
+                // Fetch all rows and store in the array
+                while ($row = $result->fetch_assoc()) {
+                    $providerDetails[] = $row;
+                }
                 echo json_encode(array("status" => "success", "data" => $providerDetails));
             } else {
                 http_response_code(404);
@@ -58,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
+
 // Check if the request method is POST for booking an appointment
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the input data from the request
@@ -74,29 +79,42 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         !empty($data['serviceProviderId']) && // Ensure serviceProviderId is provided
         !empty($data['user_id']) // Ensure userId is provided
     ) {
-        // Prepare the SQL query to insert the appointment into the database
-        $stmt = $conn->prepare("INSERT INTO appointments (customer_name, pet_type, pet_name, service_type, appointment_date, appointment_time, service_provider_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param(
-            "ssssssii",
-            $data['customerName'],
-            $data['petType'],
-            $data['petName'],
-            implode(", ", $data['serviceType']), // Multiple service types
-            $data['date'],
-            $data['time'],
-            $data['serviceProviderId'], // Bind the serviceProviderId to the query
-            $data['user_id'] // Bind the userId to the query
-        );
+        // Check if the selected time slot is available
+        $checkStmt = $conn->prepare("SELECT * FROM appointments WHERE appointment_date = ? AND appointment_time = ? AND service_provider_id = ? AND status = 'not_completed'");
+        $checkStmt->bind_param("ssi", $data['date'], $data['time'], $data['serviceProviderId']);
+        $checkStmt->execute();
+        $result = $checkStmt->get_result();
 
-        // Execute the query and check if successful
-        if ($stmt->execute()) {
-            echo json_encode(array("status" => "success", "message" => "Appointment booked successfully"));
+        if ($result->num_rows > 0) {
+            // If a conflicting appointment exists, return an error message
+            echo json_encode(array("status" => "error", "message" => "Time slot is already booked"));
         } else {
-            http_response_code(500);
-            echo json_encode(array("status" => "error", "message" => "Failed to book appointment"));
+            // No conflicting appointment found, proceed to book the appointment
+            $stmt = $conn->prepare("INSERT INTO appointments (customer_name, pet_type, pet_name, service_type, appointment_date, appointment_time, service_provider_id, user_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'not_completed')");
+            $stmt->bind_param(
+                "ssssssii",
+                $data['customerName'],
+                $data['petType'],
+                $data['petName'],
+                implode(", ", $data['serviceType']), // Multiple service types
+                $data['date'],
+                $data['time'],
+                $data['serviceProviderId'], // Bind the serviceProviderId to the query
+                $data['user_id'] // Bind the userId to the query
+            );
+
+            // Execute the query and check if successful
+            if ($stmt->execute()) {
+                echo json_encode(array("status" => "success", "message" => "Appointment booked successfully"));
+            } else {
+                http_response_code(500);
+                echo json_encode(array("status" => "error", "message" => "Failed to book appointment"));
+            }
+
+            $stmt->close();
         }
 
-        $stmt->close();
+        $checkStmt->close();
     } else {
         // If any required field is missing, return an error
         http_response_code(400);
