@@ -18,25 +18,32 @@ const NavBar = () => {
     // Define menu items for both types of users
     const unregisteredMenuItems = ['Home', 'Who We Are', 'Our Services', 'Contact Us'];
     const registeredMenuItems = [
-        
         {
             label: 'Home',
             route: '/'
-        }, 
-        'Who We Are', 
-        'Our Services', 
-        'Contact Us', 
+        },
+        'Who We Are',
+        'Our Services',
+        'Contact Us',
         {
             label: 'Emergency Appointment',
             route: '/emergencyappointment',
             style: { color: 'red', fontWeight: 'bold' }
-        }, 
+        },
         {
             label: 'Appointment',
             route: '/appointment'
-        }, 
-        'My Appointments', 
-        'Profile'
+        },
+        'My Appointments',
+        'Profile',
+        {
+            label: 'Pet Registration',
+            route: '/pet-registration'
+        },
+        {
+            label: 'View My Pets',
+            route: '/view-my-pets'
+        }
     ];
 
     const petsSubMenu = [
