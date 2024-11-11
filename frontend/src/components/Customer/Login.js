@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.email == "admin@gmail.com" && formData.password == "admin"){
+    if (formData.email === "admin@gmail.com" && formData.password == "admin"){
       Swal.fire('Success', 'Welcome to Admin Dashboard', 'success');
       setTimeout(() => {
         window.location.href = "/adminDashboard";

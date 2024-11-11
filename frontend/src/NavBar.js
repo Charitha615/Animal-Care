@@ -35,7 +35,10 @@ const NavBar = () => {
             route: '/appointment'
         },
         'My Appointments',
-        'Profile',
+        {
+            label: 'Profile',
+            route: '/customer-profile'
+        },
         {
             label: 'Pet Registration',
             route: '/pet-registration'

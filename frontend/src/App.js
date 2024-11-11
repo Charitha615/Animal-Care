@@ -18,6 +18,9 @@ import DoctorProfileManagement from './components/Doctor/DoctorProfileManagement
 import DoctorAppointments from './components/Doctor/DoctorAppointments.js';
 import DoctorEmergencyAppointments from './components/Doctor/DoctorEmergencyAppointments.js';
 import MyAppointments from './components/Customer/myAppoinment.js';
+import ViewMyPets  from './components/Customer/ViewMyPets.js';
+import PetRegistration  from './components/Customer/PetRegistration.js';
+import CustomerProfile  from './components/Customer/CustomerProfile.js';
 
 import AdminDashboard from './components/Admin/AdminDashboard.js';
 
@@ -60,6 +63,9 @@ function App() {
 
 
           <Route path="/my-appointments" element={<MyAppointments />} />
+          <Route path="/view-my-pets" element={<ViewMyPets />} />
+          <Route path="/pet-registration" element={<PetRegistration />} />
+          <Route path="/customer-profile" element={<CustomerProfile />} />
 
 
 
