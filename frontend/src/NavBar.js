@@ -125,17 +125,30 @@ const NavBar = () => {
                     <Box>
                         <List>
                             {bottomMenuItems.map((text, index) => (
-                                <ListItem 
-                                    button 
-                                    key={index} 
-                                    onClick={text === 'Logout' ? handleLogout : () => navigate(`/${text.toLowerCase().replace(/\s+/g, '-')}`)}
+                                <ListItem
+                                    button
+                                    key={index}
+                                    onClick={() => {
+                                        if (text === 'Inquiry') {
+                                            navigate('/customer-Inquiry'); // Direct to /customer-Inquiry for Inquiry
+                                        }
+                                        else if (text === 'Feedback') {
+                                            navigate('/customer-Feedback'); // Direct to /customer-Inquiry for Inquiry
+                                        }else if (text === 'Logout') {
+                                            handleLogout();
+                                        } else {
+                                            navigate(`/${text.toLowerCase().replace(/\s+/g, '-')}`);
+                                        }
+                                    }}
                                 >
                                     <ListItemText primary={text} />
                                 </ListItem>
                             ))}
                         </List>
                     </Box>
+
                 </Box>
+
             </Drawer>
         </Box>
     );

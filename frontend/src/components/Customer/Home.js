@@ -1,22 +1,44 @@
-// Home.js
 import React from 'react';
 import { Box, Typography, Grid, Paper, Container, Divider } from '@mui/material';
-import NavBar from '../../NavBar'; // Import the NavBar
+import NavBar from '../../NavBar';
+import Map from './Map';
 
 const Home = () => {
+    const locations = [
+        { "name": "Piliyandala", "lat": 6.8018, "lng": 79.9202 },
+        { "name": "Maharagama", "lat": 6.8463, "lng": 79.9285 },
+        { "name": "Matara", "lat": 5.945, "lng": 80.554 }
+    ];
+
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <NavBar />  {/* Use the NavBar component */}
-
+            <NavBar />
             {/* Main image banner */}
-            <Box sx={{ height: '80vh', backgroundImage: 'url(https://cdna.artstation.com/p/marketplace/presentation_assets/002/964/164/large/file.jpg?1693155098)', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Box
+                sx={{
+                    height: '80vh',
+                    backgroundImage: 'url(https://cdna.artstation.com/p/marketplace/presentation_assets/002/964/164/large/file.jpg?1693155098)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 <Typography variant="h3" color="white" sx={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
                     Welcome to Animal Care
                 </Typography>
             </Box>
 
+            {/* Map section */}
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
+                <Box sx={{ width: '80%', height: '200px' }}> {/* Set the height and width for the map */}
+                    <Map locations={locations} />
+                </Box>
+            </Box>
+
             {/* Our Services Section */}
-            <Box sx={{ py: 8, backgroundColor: '#f7f7f7' }}>
+            <Box sx={{ py: 8, backgroundColor: '#f7f7f7', marginTop:50 }}>
                 <Container>
                     <Typography variant="h4" align="center" gutterBottom>
                         Our Services

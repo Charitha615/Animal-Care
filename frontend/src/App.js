@@ -30,6 +30,9 @@ import CustomerDetails from './components/Admin/customerDetails.js';
 import ServiceProviderDetails from './components/Admin/ServiceProviderDetails.js';
 import ServiceProviderAppoinmentPage from './components/ServiceProvider/serviceAppointmentsPage.js';
 
+import Inquiry from './components/Customer/Inquiry';
+import Feedback from './components/Customer/Feedback';
+
 // import DoctorProfile from './components/Doctor/doctorProfile.js';
 
 
@@ -66,7 +69,8 @@ function App() {
           <Route path="/view-my-pets" element={<ViewMyPets />} />
           <Route path="/pet-registration" element={<PetRegistration />} />
           <Route path="/customer-profile" element={<CustomerProfile />} />
-
+          <Route path="/customer-Inquiry" element={<Inquiry />} />
+          <Route path="/customer-Feedback" element={<Feedback />} />
 
 
           <Route path="/service-provider-register" element={<ServiceProviderRegistration />} />

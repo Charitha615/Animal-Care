@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.leaflet-container {
+  overflow: hidden !important;
+  border-radius: 8px; /* Optional for styling */
+}
+/* Add this to your main CSS file */
