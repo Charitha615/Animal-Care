@@ -1,31 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 12, 2024 at 09:50 AM
--- Server version: 8.3.0
--- PHP Version: 8.2.18
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `animal_care`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `appointments`
---
 
 DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE IF NOT EXISTS `appointments` (
@@ -41,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `appointments` (
   `status` varchar(50) NOT NULL DEFAULT 'not_completed',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+); 
 
 --
 -- Dumping data for table `appointments`
@@ -67,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `customers`
@@ -102,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `medical_license_number` (`medical_license_number`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+); 
 
 --
 -- Dumping data for table `doctors`
@@ -133,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `emergency_appointments` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+); 
 
 --
 -- Dumping data for table `emergency_appointments`
@@ -171,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `comments` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `feedback`
@@ -198,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `inquiries` (
   `message` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Dumping data for table `inquiries`
@@ -226,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `pets`
@@ -256,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `service_providers` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `service_providers`
@@ -284,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `service_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 -- --------------------------------------------------------
 
@@ -301,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `vaccinations` (
   `status` varchar(50) NOT NULL DEFAULT 'completed',
   PRIMARY KEY (`id`),
   KEY `pet_id` (`pet_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `vaccinations`
