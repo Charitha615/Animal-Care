@@ -26,6 +26,7 @@ const DoctorDashboard = () => {
   const [filteredPatients, setFilteredPatients] = useState([]);
   const [emergencyAppointment, setEmergencyAppointment] = useState(null); // Emergency Appointment State
   const [openEmergencyModal, setOpenEmergencyModal] = useState(false); // Modal for Emergency Appointments
+  const [openEmergencyModalcheck, setopenEmergencyModalcheck] = useState(false); // Modal for Emergency Appointments
   const [emergencyAppointments, setEmergencyAppointments] = useState([]);
   const navigate = useNavigate();
 
@@ -165,7 +166,7 @@ const DoctorDashboard = () => {
         .then(response => {
           if (response.data.status === 'success') {
             setEmergencyAppointments(response.data.data);
-            setOpenEmergencyModal(true);
+            setopenEmergencyModalcheck(true);
           } else {
             console.error('Failed to fetch emergency appointments');
           }
@@ -326,7 +327,7 @@ const DoctorDashboard = () => {
           </Grid>
 
           {/* Emergency Appointments Modal */}
-          <Modal open={openEmergencyModal} onClose={handleCloseEmergencyModal}>
+          <Modal open={openEmergencyModalcheck} onClose={handleCloseEmergencyModal}>
             <Box sx={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
               bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2, width: '80%',

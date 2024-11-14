@@ -1,0 +1,82 @@
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: Array
+(
+    [status] => completed
+)
+Invalid data: vaccination_id=0, status=completed
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"vaccination_id":"2","status":"completed"}
+Parsed data - vaccination_id: 2, status: completed
+Received input: {"vaccination_id":"1","status":"completed"}
+Parsed data - vaccination_id: 1, status: completed
+Received input: {"vaccination_id":"2","status":"completed"}
+Parsed data - vaccination_id: 2, status: completed
+Received input: {"vaccination_id":"1","status":"completed"}
+Parsed data - vaccination_id: 1, status: completed
+Received input: {"vaccination_id":"1","status":"completed"}
+Parsed data - vaccination_id: 1, status: completed
+Received input: {"vaccination_id":"4","status":"completed"}
+Parsed data - vaccination_id: 4, status: completed
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"vaccination_id":"6","status":"completed"}
+Parsed data - vaccination_id: 6, status: completed
+Received input: {"vaccination_id":"5","status":"completed"}
+Parsed data - vaccination_id: 5, status: completed
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"status":"completed"}
+Parsed data - vaccination_id: 0, status: completed
+Invalid data detected
+Received input: {"vaccination_id":"2","status":"completed"}
+Parsed data - vaccination_id: 2, status: completed

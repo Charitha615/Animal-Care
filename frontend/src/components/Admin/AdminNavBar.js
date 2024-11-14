@@ -42,9 +42,9 @@ const AdminNavBar = () => {
                     </Link>
                 </li>
                 <li className="menu-item">
-                    <Link to="/admin-dashboard/notifications">
-                        <FaBell className="icon" /> Notification
-                    </Link>
+                    {/*<Link to="/admin-dashboard/notifications">*/}
+                    {/*    <FaBell className="icon" /> Notification*/}
+                    {/*</Link>*/}
                 </li>
             </ul>
         </aside>
