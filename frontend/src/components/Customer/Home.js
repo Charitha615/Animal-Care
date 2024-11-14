@@ -32,8 +32,8 @@ const Home = () => {
 
             {/* Map section */}
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
-                <Box sx={{ width: '80%', height: '200px' }}> {/* Set the height and width for the map */}
-                    <Map locations={locations} />
+                <Box sx={{ width: '80%', height: '800px' }}> {/* Adjust height as needed */}
+                    <Map /> {/* Integrate Map component */}
                 </Box>
             </Box>
 
@@ -118,7 +118,7 @@ const Home = () => {
             {/*</Box>*/}
 
             {/* Footer */}
-            <Box sx={{ py: 6, backgroundColor: '#303030', color: 'white',marginTop:50  }}>
+            <Box sx={{ py: 6, backgroundColor: '#303030', color: 'white',marginTop:20 }}>
                 <Container>
                     <Grid container spacing={4}>
                         <Grid item xs={12} md={3}>

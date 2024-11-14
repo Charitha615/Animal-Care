@@ -1,48 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { TextField, Box } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
 
-const Map = ({ locations }) => {
-    const [mapCenter, setMapCenter] = useState([7.8731, 80.7718]); // Initial center
+const Map = () => {
+    const mapRef = useRef(null);
 
-    const handleSearch = (e) => {
-        const location = locations.find(loc => loc.name.toLowerCase() === e.target.value.toLowerCase());
-        if (location) {
-            setMapCenter([location.lat, location.lng]);
+    useEffect(() => {
+        // Function to initialize the map
+        const initMap = () => {
+            new window.google.maps.Map(mapRef.current, {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8,
+            });
+        };
+
+        // Load the Google Maps script and call initMap
+        const loadGoogleMapsScript = () => {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap`;
+            script.async = true;
+            script.defer = true;
+            script.onload = initMap; // Initialize map once script is loaded
+            document.head.appendChild(script);
+        };
+
+        // Check if the Google Maps API script is already present
+        if (!window.google) {
+            loadGoogleMapsScript();
+        } else {
+            initMap(); // Initialize map if Google Maps is already loaded
         }
-    };
-
-    function MapResizeTrigger() {
-        const map = useMap();
-        useEffect(() => {
-            map.invalidateSize(); // Forces Leaflet to re-check the container size
-        }, [map]);
-        return null;
-    }
+    }, []);
 
     return (
-        <Box sx={{ mt: 4, textAlign: 'center' }}>
-            <TextField
-                label="Search Location"
-                variant="outlined"
-                onChange={handleSearch}
-                sx={{ mb: 2 }}
-            />
-            <Box sx={{ width: '100%', height: '400px' }}> {/* Set container for the map */}
-                <MapContainer center={mapCenter} zoom={10} style={{ height: '100%', width: '100%' }}>
-                    <MapResizeTrigger /> {/* Trigger map resize */}
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    {locations.map((location, index) => (
-                        <Marker key={index} position={[location.lat, location.lng]}>
-                            <Popup>{location.name}</Popup>
-                        </Marker>
-                    ))}
-                </MapContainer>
-            </Box>
-        </Box>
+        <div
+            ref={mapRef}
+            style={{ height: '800px', width: '100%' }} // Set desired map size here
+        />
     );
 };
 

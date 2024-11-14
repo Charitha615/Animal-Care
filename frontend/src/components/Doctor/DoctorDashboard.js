@@ -178,7 +178,7 @@ const DoctorDashboard = () => {
   };
 
   // Handle closing the emergency appointments modal
-  const handleCloseEmergencyModal = () => setOpenEmergencyModal(false);
+  const handleCloseEmergencyModal = () => setopenEmergencyModalcheck(false);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
