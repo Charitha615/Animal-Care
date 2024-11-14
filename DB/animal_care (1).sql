@@ -1,7 +1,28 @@
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+--
+-- Host: localhost    Database: animal_care
+-- ------------------------------------------------------
+-- Server version	8.3.0
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `appointments`
+--
 
 DROP TABLE IF EXISTS `appointments`;
-CREATE TABLE IF NOT EXISTS `appointments` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `appointments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `customer_name` varchar(255) NOT NULL,
   `user_id` int DEFAULT NULL,
@@ -14,24 +35,27 @@ CREATE TABLE IF NOT EXISTS `appointments` (
   `status` varchar(50) NOT NULL DEFAULT 'not_completed',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-); 
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`id`, `customer_name`, `user_id`, `pet_type`, `pet_name`, `service_type`, `appointment_date`, `appointment_time`, `service_provider_id`, `status`, `created_at`) VALUES
-(1, 'cha', 1, 'Dog', 'sss', 'Vaccinations', '2024-10-27', '01:42:00', 2, 'completed', '2024-10-26 20:12:17'),
-(2, 'cus test name', 1, 'Bird', 'dsa', 'Vaccinations', '2024-10-27', '01:43:00', 2, 'completed', '2024-10-27 04:07:42');
-
--- --------------------------------------------------------
+LOCK TABLES `appointments` WRITE;
+/*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
+INSERT INTO `appointments` VALUES (1,'cha',1,'Dog','sss','Vaccinations','2024-10-27','01:42:00',2,'completed','2024-10-26 20:12:17'),(2,'cus test name',1,'Bird','dsa','Vaccinations','2024-10-27','01:43:00',2,'completed','2024-10-27 04:07:42');
+/*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `customers`
 --
 
 DROP TABLE IF EXISTS `customers`;
-CREATE TABLE IF NOT EXISTS `customers` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nic` varchar(12) NOT NULL,
   `customer_name` varchar(100) NOT NULL,
@@ -40,24 +64,27 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `nic`, `customer_name`, `address`, `phone_no`, `email`, `password`) VALUES
-(1, '22', 'dasdas', 'dasdas', 232, 'dasdas', 'dsa'),
-(3, '992891722V', 'string', 'add', 789621706, 'string@gmail.com', '$2y$10$XWDhckCyisOB6T6rHw6zyOvUlmGj1Zeuwm3adgSJ1aOniAAdDqrfK');
-
--- --------------------------------------------------------
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (3,'992891722V','string','add',789621706,'string@gmail.com','$2y$10$XWDhckCyisOB6T6rHw6zyOvUlmGj1Zeuwm3adgSJ1aOniAAdDqrfK');
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `doctors`
 --
 
 DROP TABLE IF EXISTS `doctors`;
-CREATE TABLE IF NOT EXISTS `doctors` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `doctors` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -75,25 +102,27 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `medical_license_number` (`medical_license_number`)
-); 
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `doctors`
 --
 
-INSERT INTO `doctors` (`id`, `email`, `password`, `full_name`, `gender`, `date_of_birth`, `phone_number`, `medical_license_number`, `specialization`, `years_of_experience`, `qualifications`, `available_start_time`, `available_end_time`, `profile_image`) VALUES
-(1, 'doc@gmail.com', '$2y$10$jEnqZFyN8R.HLD6jFkeZUOfLIEPAg4arSNQ2QQ7ZCqcbRnonO3Ysq', 'update', 'Male', '2024-10-24', '2321312', 'dasd232', 'dad', 8, 'dsd', '00:01:00', '23:45:00', 'uploads/doctor_images/1729965287_eos-r5-mark-ii_hotspot-module_b2bcadf5c83d441fbbcc89018b3e457c.jpeg'),
-(2, 'doctor@example.com', '$2y$10$6ntqpe012a4c0.3c/QHvrOEG6zDL9nIZDbXO5bPuu2mMtZ1b6b8LS', 'Dr. John Doe', '', '1980-05-15', ' 1234567890', ' ML12345', ' Cardiology', 10, ' MBBS, MD', NULL, NULL, ''),
-(3, 'doctorss@example.com', '$2y$10$U4ArI2iyRmC1gbERfZQaqecV/OXufp6zElMGpprtm9riTSdt1AZMK', 'Dr. John Doe', '', '1980-05-15', ' 1234567890', ' ML123454', ' Cardiology', 10, ' MBBS, MD', NULL, NULL, 'uploads/doctor_images/1729972980_360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg');
-
--- --------------------------------------------------------
+LOCK TABLES `doctors` WRITE;
+/*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
+INSERT INTO `doctors` VALUES (1,'doc@gmail.com','$2y$10$jEnqZFyN8R.HLD6jFkeZUOfLIEPAg4arSNQ2QQ7ZCqcbRnonO3Ysq','update','Male','2024-10-24','2321312','dasd232','dad',8,'dsd','00:01:00','23:45:00','uploads/doctor_images/1729965287_eos-r5-mark-ii_hotspot-module_b2bcadf5c83d441fbbcc89018b3e457c.jpeg'),(2,'doctor@example.com','$2y$10$6ntqpe012a4c0.3c/QHvrOEG6zDL9nIZDbXO5bPuu2mMtZ1b6b8LS','Dr. John Doe','','1980-05-15',' 1234567890',' ML12345',' Cardiology',10,' MBBS, MD',NULL,NULL,''),(3,'doctorss@example.com','$2y$10$U4ArI2iyRmC1gbERfZQaqecV/OXufp6zElMGpprtm9riTSdt1AZMK','Dr. John Doe','','1980-05-15',' 1234567890',' ML123454',' Cardiology',10,' MBBS, MD',NULL,NULL,'uploads/doctor_images/1729972980_360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'),(4,'das@gmail.com','$2y$10$UKg/Ion3FZ.ZSZ6L0KjAm.Tw8vp.HuTTs0mh4P9xCePVg07Ljb2da','das','Male','2024-11-30','0704068787','asd1234555','asd',23,'dasd',NULL,NULL,'');
+/*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `emergency_appointments`
 --
 
 DROP TABLE IF EXISTS `emergency_appointments`;
-CREATE TABLE IF NOT EXISTS `emergency_appointments` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emergency_appointments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `customer_name` varchar(255) NOT NULL,
@@ -106,63 +135,54 @@ CREATE TABLE IF NOT EXISTS `emergency_appointments` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-); 
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `emergency_appointments`
 --
 
-INSERT INTO `emergency_appointments` (`id`, `user_id`, `customer_name`, `appointment_time`, `google_meeting_link`, `gender`, `payment_status`, `doctor_id`, `status`, `created_at`) VALUES
-(1, 1, 'Test  user', '2024-10-25 23:28:00', 'https://meet.google.com/tqe-gzex-gxv', 'Male', 'Completed', 1, 'Done', '2024-10-25 17:58:00'),
-(2, 1, 'Test  user', '2024-10-26 00:40:14', '', '', 'Completed', 1, 'Done', '2024-10-25 19:10:14'),
-(3, 1, 'Test  user', '2024-10-26 00:41:25', '', '', 'Completed', 1, 'Done', '2024-10-25 19:11:25'),
-(4, 1, 'Test  user', '2024-10-26 00:41:58', '', '', 'Completed', 1, 'Done', '2024-10-25 19:11:58'),
-(5, 1, 'Test  user', '2024-10-26 00:49:08', '', '', 'Completed', 1, 'Done', '2024-10-25 19:19:08'),
-(6, 1, 'Test  user', '2024-10-26 00:50:00', '', '', 'Completed', 1, 'Done', '2024-10-25 19:20:00'),
-(7, 1, 'Test  user', '2024-10-26 00:50:59', '', '', 'Completed', 1, 'Done', '2024-10-25 19:20:59'),
-(8, 1, 'Test  user', '2024-10-26 00:51:41', '', '', 'Completed', 1, 'Done', '2024-10-25 19:21:41'),
-(9, 1, 'Test  user', '2024-10-26 00:52:46', '', '', 'Completed', 1, 'Done', '2024-10-25 19:22:46'),
-(10, 1, 'Test  user', '2024-10-26 00:53:00', '', '', 'Completed', 1, 'Done', '2024-10-25 19:23:00'),
-(11, 1, 'Test  user', '2024-10-26 00:54:34', '', '', 'Completed', 1, 'Done', '2024-10-25 19:24:34'),
-(12, 1, 'Test  user', '2024-10-26 22:54:38', 'https://meet.google.com/klm-nopq-rst', '', 'Completed', 1, 'Done', '2024-10-26 17:24:38'),
-(13, 1, 'Test  user', '2024-10-26 23:01:40', 'https://meet.google.com/klm-nopq-rst', '', 'Completed', 1, 'Done', '2024-10-26 17:31:40'),
-(14, 1, 'Test  user', '2024-10-26 23:01:59', 'https://meet.google.com/klm-nopq-rst', '', 'Completed', 1, 'Done', '2024-10-26 17:31:59'),
-(15, 1, 'Test  user', '2024-10-26 23:02:50', 'https://meet.google.com/uvw-xyza-abc', '', 'Completed', 1, 'Done', '2024-10-26 17:32:50'),
-(16, 1, 'Test  user', '2024-10-26 23:03:00', 'https://meet.google.com/uvw-xyza-2es', '', 'Completed', 1, 'Done', '2024-10-26 17:33:00');
-
--- --------------------------------------------------------
+LOCK TABLES `emergency_appointments` WRITE;
+/*!40000 ALTER TABLE `emergency_appointments` DISABLE KEYS */;
+INSERT INTO `emergency_appointments` VALUES (1,1,'string','2024-11-13 20:29:58','https://meet.google.com/uvw-xyza-bcd','','Completed',1,'Done','2024-11-13 14:59:58'),(2,2,'string','2023-11-13 20:36:35','https://meet.google.com/klm-nopq-rst','','Completed',1,'Done','2024-11-13 15:06:35'),(3,3,'string','2024-11-13 22:28:34','https://meet.google.com/uvw-xyza-hth','Male','Completed',1,'Done','2024-11-13 16:58:34');
+/*!40000 ALTER TABLE `emergency_appointments` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `feedback`
 --
 
 DROP TABLE IF EXISTS `feedback`;
-CREATE TABLE IF NOT EXISTS `feedback` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `feedback` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `feedback_type` enum('positive','negative') NOT NULL,
   `comments` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-);
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `feedback`
 --
 
-INSERT INTO `feedback` (`id`, `user_id`, `feedback_type`, `comments`, `created_at`) VALUES
-(1, 3, 'positive', 'dasdas', '2024-11-11 19:53:13'),
-(2, 3, 'positive', 'dasdas', '2024-11-11 19:55:52'),
-(3, 3, 'negative', 'dasdasd', '2024-11-11 20:07:27');
-
--- --------------------------------------------------------
+LOCK TABLES `feedback` WRITE;
+/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,3,'positive','dasdas','2024-11-11 19:53:13'),(2,3,'positive','dasdas','2024-11-11 19:55:52'),(3,3,'negative','dasdasd','2024-11-11 20:07:27'),(4,3,'negative','dasdadasd','2024-11-13 16:59:26');
+/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `inquiries`
 --
 
 DROP TABLE IF EXISTS `inquiries`;
-CREATE TABLE IF NOT EXISTS `inquiries` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `inquiries` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -171,26 +191,27 @@ CREATE TABLE IF NOT EXISTS `inquiries` (
   `message` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `inquiries`
 --
 
-INSERT INTO `inquiries` (`id`, `user_id`, `name`, `email`, `subject`, `message`, `created_at`) VALUES
-(1, 3, 'Charitha', 'adweb@gmail.com', 'adsa', 'das', '2024-11-11 19:13:16'),
-(2, 3, 'das', 'adweb@gmail.com', 'adsa', 'das', '2024-11-11 19:17:25'),
-(3, 3, 'Charitha', 'john.doe@example.com', 'adsa', 'das', '2024-11-11 19:18:49'),
-(4, 3, 'das', 'adweb@gmail.com', 'das', 'das', '2024-11-11 19:20:38');
-
--- --------------------------------------------------------
+LOCK TABLES `inquiries` WRITE;
+/*!40000 ALTER TABLE `inquiries` DISABLE KEYS */;
+INSERT INTO `inquiries` VALUES (1,3,'Charitha','adweb@gmail.com','adsa','das','2024-11-11 19:13:16'),(2,3,'das','adweb@gmail.com','adsa','das','2024-11-11 19:17:25'),(3,3,'Charitha','john.doe@example.com','adsa','das','2024-11-11 19:18:49'),(4,3,'das','adweb@gmail.com','das','das','2024-11-11 19:20:38');
+/*!40000 ALTER TABLE `inquiries` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `pets`
 --
 
 DROP TABLE IF EXISTS `pets`;
-CREATE TABLE IF NOT EXISTS `pets` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pet_name` varchar(255) NOT NULL,
   `breed` varchar(255) NOT NULL,
@@ -199,23 +220,27 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pets`
 --
 
-INSERT INTO `pets` (`id`, `pet_name`, `breed`, `age`, `image_path`, `created_at`, `user_id`) VALUES
-(1, 'Shaddy', 'Dog', 2, 'uploads/pngtree-blue-bird-vector-or-color-illustration-png-image_2013004.jpg', '2024-11-10 11:07:48', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `pets` WRITE;
+/*!40000 ALTER TABLE `pets` DISABLE KEYS */;
+INSERT INTO `pets` VALUES (1,'Shaddy','Dog',2,'uploads/pngtree-blue-bird-vector-or-color-illustration-png-image_2013004.jpg','2024-11-10 11:07:48',1),(2,'sample','dog',15,'','2024-11-13 17:07:32',3);
+/*!40000 ALTER TABLE `pets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `service_providers`
 --
 
 DROP TABLE IF EXISTS `service_providers`;
-CREATE TABLE IF NOT EXISTS `service_providers` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `service_providers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `service_center_name` varchar(50) NOT NULL,
   `owner_name` varchar(50) NOT NULL,
@@ -229,23 +254,27 @@ CREATE TABLE IF NOT EXISTS `service_providers` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-);
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `service_providers`
 --
 
-INSERT INTO `service_providers` (`id`, `service_center_name`, `owner_name`, `location`, `phone_no`, `email`, `nic`, `image`, `service_types`, `password`, `created_at`) VALUES
-(2, 'Serv pro', 'tharaka', 'piliyandala', '0789621706', 'sp@gmail.com', '992891722V', 'uploads/WhatsApp_Image_2024-10-27_at_00.31.55_e076d18b.jpg', '[\"Vaccinations\",\"Doctor channeling\",\"Scanning\"]', '$2y$10$SoxWkQC3d35mqSJhtqv2kenaNoIUeYYvT57FQBq/hMC.SK7pHF5ZG', '2024-10-26 19:29:07');
-
--- --------------------------------------------------------
+LOCK TABLES `service_providers` WRITE;
+/*!40000 ALTER TABLE `service_providers` DISABLE KEYS */;
+INSERT INTO `service_providers` VALUES (2,'Serv pro','tharaka','piliyandala','0789621706','sp@gmail.com','992891722V','uploads/WhatsApp_Image_2024-10-27_at_00.31.55_e076d18b.jpg','[\"Vaccinations\",\"Doctor channeling\",\"Scanning\"]','$2y$10$SoxWkQC3d35mqSJhtqv2kenaNoIUeYYvT57FQBq/hMC.SK7pHF5ZG','2024-10-26 19:29:07'),(3,'das','das','das','0789621706','das@gmail.com','992891722V','uploads/wallpaperflare.com_wallpaper_(3).jpg','[\"Vaccinations\"]','$2y$10$O/UsoGMeNaIH0UTMbDGkhOpf232A9UTWNd7Za7SpfYI1R3iArRpaO','2024-11-13 14:54:33');
+/*!40000 ALTER TABLE `service_providers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `staff`
 --
 
 DROP TABLE IF EXISTS `staff`;
-CREATE TABLE IF NOT EXISTS `staff` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `staff` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
@@ -257,16 +286,26 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `service_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `staff`
+--
+
+LOCK TABLES `staff` WRITE;
+/*!40000 ALTER TABLE `staff` DISABLE KEYS */;
+/*!40000 ALTER TABLE `staff` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `vaccinations`
 --
 
 DROP TABLE IF EXISTS `vaccinations`;
-CREATE TABLE IF NOT EXISTS `vaccinations` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vaccinations` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pet_id` int NOT NULL,
   `vaccination_name` varchar(255) NOT NULL,
@@ -274,17 +313,26 @@ CREATE TABLE IF NOT EXISTS `vaccinations` (
   `status` varchar(50) NOT NULL DEFAULT 'completed',
   PRIMARY KEY (`id`),
   KEY `pet_id` (`pet_id`)
-);
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `vaccinations`
 --
 
-INSERT INTO `vaccinations` (`id`, `pet_id`, `vaccination_name`, `vaccination_date`, `status`) VALUES
-(1, 1, '1st dor', '2024-11-08', 'completed'),
-(2, 1, 'doos 2', '2024-11-11', 'completed');
-COMMIT;
+LOCK TABLES `vaccinations` WRITE;
+/*!40000 ALTER TABLE `vaccinations` DISABLE KEYS */;
+INSERT INTO `vaccinations` VALUES (1,1,'1st dor','2024-11-08','completed'),(2,1,'doos 2','2024-11-11','completed'),(3,2,'non','2024-11-13','completed'),(4,2,'two','2024-11-08','completed'),(5,2,'3wrwes','2024-11-05','upcoming');
+/*!40000 ALTER TABLE `vaccinations` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-11-14 16:02:59

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "680a488b-3eec-4a8f-9ab0-0f400012f839",
+		"_postman_id": "5b87808f-062c-4b06-ae30-211c89881914",
 		"name": "Animal Care",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -61,6 +61,82 @@
 								"animal_care_api",
 								"Customer",
 								"CustomerRegistrationLogin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Customer/getAllCustomer.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Customer",
+								"getAllCustomer.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"update\",\r\n    \"id\": \"1\", \r\n    \"customer_name\": \"New Customer Name\",\r\n    \"address\": \"New Address\",\r\n    \"phone_no\": \"1234567890\",\r\n    \"email\": \"newemail@example.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Customer/updateCustomer.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Customer",
+								"updateCustomer.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Customer/deactivateCustomer.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Customer",
+								"deactivateCustomer.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -140,8 +216,69 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"action\": \"register\",\r\n    \"email\": \"doctor@example.com\",\r\n    \"password\": \"password123\",\r\n    \"full_name\": \"Dr. John Doe\",\r\n    \"gender\": \"Male\",\r\n    \"date_of_birth\": \"1980-05-15\",\r\n    \"phone_number\": \"1234567890\",\r\n    \"medical_license_number\": \"ML12345\",\r\n    \"specialization\": \"Cardiology\",\r\n    \"years_of_experience\": 10,\r\n    \"qualifications\": \"MBBS, MD\"\r\n}\r\n",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "action",
+									"value": "register",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "doctorss@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								},
+								{
+									"key": "full_name",
+									"value": "Dr. John Doe",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": " Male",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": " 1980-05-15",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": " 1234567890",
+									"type": "text"
+								},
+								{
+									"key": "medical_license_number",
+									"value": " ML123454",
+									"type": "text"
+								},
+								{
+									"key": "specialization",
+									"value": " Cardiology",
+									"type": "text"
+								},
+								{
+									"key": "years_of_experience",
+									"value": " 10",
+									"type": "text"
+								},
+								{
+									"key": "qualifications",
+									"value": " MBBS, MD",
+									"type": "text"
+								},
+								{
+									"key": "profile_image",
+									"type": "file",
+									"src": "/C:/Users/chari/Downloads/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -170,7 +307,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"doctor@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+							"raw": "{\r\n    \"action\": \"login\",\r\n    \"email\": \"dot@gmail.com\",\r\n    \"password\": \"123\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,6 +399,96 @@
 								"animal_care_api",
 								"Doctor",
 								"GetAllDoctors.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "doctor_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "full_name",
+									"value": "charitha",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "medical_license_number",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "specialization",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "years_of_experience",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "qualifications",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "available_start_time",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "available_end_time",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "profile_image",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Doctor/update_doctor.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Doctor",
+								"update_doctor.php"
 							]
 						}
 					},
@@ -422,12 +649,12 @@
 					"response": []
 				},
 				{
-					"name": "Get All Service Providers Copy",
+					"name": "Get Service Providers By iD",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php?id=4",
+							"raw": "http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php?id=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -440,8 +667,63 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "4"
+									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all details Service Providers By iD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Service_Provider/get_all_service_providers.php?getid=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Service_Provider",
+								"get_all_service_providers.php"
+							],
+							"query": [
+								{
+									"key": "getid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Status Completed",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\": 1,\r\n    \"status\": \"completed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/update_appointment_status.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"update_appointment_status.php"
 							]
 						}
 					},
@@ -620,7 +902,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/animal_care_api/Appointment/book_appointment.php?serviceProviderId=4",
+							"raw": "http://localhost/animal_care_api/Appointment/book_appointment.php?serviceProviderId=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -633,8 +915,129 @@
 							"query": [
 								{
 									"key": "serviceProviderId",
-									"value": "4"
+									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all emergency_appointments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Appointment/get_all_emergency_appointments.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Appointment",
+								"get_all_emergency_appointments.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Get Pet Profiles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Pet/view_my_pets.php?UserID=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Pet",
+								"view_my_pets.php"
+							],
+							"query": [
+								{
+									"key": "UserID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inquiry ",
+			"item": [
+				{
+					"name": "add Inquiry ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Inquiry/store_inquiry.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Inquiry",
+								"store_inquiry.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_all_inquiries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Inquiry/get_all_inquiries.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Inquiry",
+								"get_all_inquiries.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "http://localhost/animal_care_api/Feedback/get_all_feedback.php",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/animal_care_api/Feedback/get_all_feedback.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"animal_care_api",
+								"Feedback",
+								"get_all_feedback.php"
 							]
 						}
 					},
