@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemText } from '@mui/material';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Box,
+    IconButton,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    List,
+    ListItem,
+    ListItemText,
+    Badge
+} from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -75,7 +89,13 @@ const NavBar = () => {
             <AppBar position="static" color="primary">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={handleNotificationClick}>
-                        <NotificationsIcon sx={{ animation: hasNewNotifications ? 'shake 0.5s infinite' : 'none' }} />
+                        <Badge
+                            badgeContent={notifications.length}
+                            color="error"
+                            sx={{ animation: hasNewNotifications ? 'shake 0.5s infinite' : 'none' }}
+                        >
+                            <NotificationsIcon />
+                        </Badge>
                     </IconButton>
                     <Typography variant="h6" sx={{ flexGrow: 1, ml: 1 }}>
                         <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Animal Care</a>
